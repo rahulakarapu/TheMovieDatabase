@@ -41,3 +41,21 @@ body {
 .favtxt {
   margin-right: 0.5rem;
 }
+
+@media all and (min-width:0px) and (max-width: 650px) {
+  body {
+    background: #141414;
+    color: #ffffff;
+    font-size: 1rem;
+  }
+
+  .image-container {
+    max-width: 20rem;
+    max-height: 25rem;
+  }
+
+  .overlay {
+    font-size: 1rem;
+    width: 94%;
+  }
+}
