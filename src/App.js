@@ -31,7 +31,7 @@ function App() {
     timer.current = setTimeout(() => {
       getMovieRequest.call(this, searchValue);
       clearTimeout(timer.current);
-    }, 300);
+    }, 500);
     
   }, [searchValue]);
 
