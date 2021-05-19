@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import MovieList from './components/MovieList';
@@ -22,8 +22,17 @@ function App() {
     }
   };
 
+  const timer = useRef();
+
   useEffect(() => {
-    getMovieRequest(searchValue);
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    timer.current = setTimeout(() => {
+      getMovieRequest.call(this, searchValue);
+      clearTimeout(timer.current);
+    }, 300);
+    
   }, [searchValue]);
 
   const saveToLocalStorage = (items) => {
@@ -53,7 +62,7 @@ function App() {
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="The Movie Database"/>
-        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
         <MovieList movies={movies} handleFavouritesClick={addFavouriteMovie} favouriteComponent={AddFavourite}/>
